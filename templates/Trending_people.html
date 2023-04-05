@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+movie_details
+{% endblock title %}
+
+{% block main %} 
+<hr>
+<div style="background-color:black">
+
+  
+  <div class="card" id="mov" style="background-color:lightblue">
+    <h1 class="text-center card-title text-dark" ><b>TRENDING PEOPLE Today</b></h1>
+  </div>
+  
+  <div class="row flex d-flex justify-content-center text-dark">
+  
+    {% for r in data.results %}
+    {% if forloop.counter <  35 %}
+    <div class="card mb-5 m-3 " style="width: 15rem; ">
+        <img src="https://image.tmdb.org/t/p/w200/{{r.poster_path}}" class="card-img-top" alt="..." >
+        <div class="card-body">
+          {% if not r.name %}
+          <h5 class="card-title"> <b>{{r.title}}</b> </h5>
+          {% else %}
+          <h5 class="card-title"><b>{{r.name}}</b> </h5>
+          {% endif %}
+          {% comment %} <p class="card-text">{{r.overview|range_filter|linebreaks}}</p> {% endcomment %}
+          {% comment %} {% if type == "day"  %} {% endcomment %}
+          <a href="{% url 'peopledetail' r.id%}" class="btn btn-primary">View Details</a>
+          {% comment %} {% else %}
+          <a href="{% url 'trendingmovies' %}" class="btn btn-primary">View Details</a>
+          {% endif %} {% endcomment %}
+        
+       
+       
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %} 
+     
+  </div>
+  <div>
+  <hr>
+  {% endblock main %}
